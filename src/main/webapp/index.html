@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="AuftragsMaske">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <base href="/">
+
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/colors.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+</head>
+<body>
+
+    <div ng-include="'navigation.html'"></div>
+
+    <div class="container row" >
+        <div ui-view></div>
+    </div>
+
+
+    <script src="libs/jquery/jquery-3.1.0.min.js"></script>
+    <script src="libs/angular/angular.min.js"></script>
+    <script src="libs/angular/angular-ui-router.min.js"></script>
+    <script src="libs/materialize/materialize.min.js"></script>
+
+    <script src="javascript/app.js"></script>
+    <script src="javascript/controllers/home/index.controller.js"></script>
+    <script src="javascript/controllers/topic/index.controller.js"></script>
+    <script src="javascript/controllers/topic/detail.controller.js"></script>
+    <script src="javascript/controllers/topic/detail.subtopic.controller.js"></script>
+    <script src="javascript/controllers/meeting/index.controller.js"></script>
+
+    <!--<script src="routes.js"></script>-->
+
+</body>
+</html>
