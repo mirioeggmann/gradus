@@ -1,8 +1,12 @@
 angular.module('AuftragsMaske')
-    .controller('MeetingIndexController', function () {
+    .controller('MeetingIndexController', function ($scope) {
 
         var vm = this;
-        
-        vm.meetingType = "problem";
+
+        $scope.request = {
+            firstname: null,
+            lastname: null
+
+        }
 
     });
