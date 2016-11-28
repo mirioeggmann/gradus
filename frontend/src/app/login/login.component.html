@@ -1,3 +1,18 @@
-<p>
-  login works!
-</p>
+<div class="demo-card-wide mdl-card mdl-shadow--2dp">
+  <form>
+
+    <h3 class="mdl-dialog__title">{{title}}</h3>
+
+    <div class="mdl-dialog__content">
+      <mdl-textfield #firstElement type="text" label="Username" floating-label></mdl-textfield>
+      <br/>
+      <mdl-textfield type="password" label="Password" floating-label></mdl-textfield>
+    </div>
+
+    <div class="mdl-dialog__actions">
+      <button
+        type="button"
+        mdl-colored="primary" mdl-ripple>Login</button>
+    </div>
+  </form>
+</div>

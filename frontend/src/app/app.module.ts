@@ -6,18 +6,27 @@ import { HttpModule } from '@angular/http';
 import { MdlModule } from '../../node_modules/angular2-mdl'
 
 import { AppComponent } from './app.component';
+import { AppRoutingModule, routedComponents } from './app-routing.module';
+import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    routedComponents,
+    RegisterComponent,
+    LoginComponent,
+    DashboardComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    MdlModule
+    MdlModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
