@@ -21,8 +21,6 @@ public class User {
 
     private String password;
 
-    private Long birthday;
-
     public Long getId() {
         return id;
     }
@@ -61,14 +59,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Long getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Long birthday) {
-        this.birthday = birthday;
     }
 
 }
