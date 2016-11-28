@@ -11,6 +11,10 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
+import { GradeDetailComponent } from './dashboard/grade-detail/grade-detail.component';
+import { GradesComponent } from './dashboard/grades/grades.component';
+import { SubjectsComponent } from './dashboard/subjects/subjects.component';
+import { SubjectDetailComponent } from './dashboard/subject-detail/subject-detail.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +23,11 @@ import { ProfileComponent } from './profile/profile.component';
     RegisterComponent,
     LoginComponent,
     DashboardComponent,
-    ProfileComponent
+    ProfileComponent,
+    GradeDetailComponent,
+    GradesComponent,
+    SubjectsComponent,
+    SubjectDetailComponent
   ],
   imports: [
     BrowserModule,
