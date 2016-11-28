@@ -6,10 +6,12 @@ import { HttpModule } from '@angular/http';
 import { MdlModule } from '../../node_modules/angular2-mdl'
 
 import { AppComponent } from './app.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
