@@ -8,3 +8,7 @@
 ## Issue create
 - As a \<user type\>, I want to \<task\> so that \<goal\>.
 - As a customer, I want to create an account so that I can make purchases.
+
+
+# Example Functional
+https://github.com/marco76/SpringAngular2TypeScript

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { IMdlTableModelItem, MdlDefaultTableModel } from '../../../node_modules/angular2-mdl'
+import {User} from "../shared/models/user.model";
+import {UserService} from "../shared/services/user/user.service";
 
 export interface ITableItem extends IMdlTableModelItem {
   subject: string;
