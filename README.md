@@ -1,5 +1,6 @@
 # Gradus
 <a href="https://zenhub.com"><img src="https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png"></a>
+[![Build Status](https://travis-ci.com/mirioeggmann/gradus.svg?token=DCE1mdUKpiTStoczqzxn&branch=master)](https://travis-ci.com/mirioeggmann/gradus)
 
 ## Example frontend
 - https://github.com/johnpapa/angular2-tour-of-heroes/tree/master/app example ang project structure
