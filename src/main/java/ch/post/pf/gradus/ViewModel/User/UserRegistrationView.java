@@ -11,10 +11,6 @@ public class UserRegistrationView {
 
     private String password;
 
-    private String passwordRepeat;
-
-    private Long birthday;
-
     public String getFirstname() {
         return firstname;
     }
@@ -47,19 +43,4 @@ public class UserRegistrationView {
         this.password = password;
     }
 
-    public String getPasswordRepeat() {
-        return passwordRepeat;
-    }
-
-    public void setPasswordRepeat(String passwordRepeat) {
-        this.passwordRepeat = passwordRepeat;
-    }
-
-    public Long getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Long birthday) {
-        this.birthday = birthday;
-    }
 }

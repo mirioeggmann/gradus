@@ -15,6 +15,7 @@ import { GradeDetailComponent } from './dashboard/grade-detail/grade-detail.comp
 import { GradesComponent } from './dashboard/grades/grades.component';
 import { SubjectsComponent } from './dashboard/subjects/subjects.component';
 import { SubjectDetailComponent } from './dashboard/subject-detail/subject-detail.component';
+import {UserService} from "./shared/services/user/user.service";
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { SubjectDetailComponent } from './dashboard/subject-detail/subject-detai
     MdlModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

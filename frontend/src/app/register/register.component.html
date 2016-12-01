@@ -7,30 +7,26 @@
       <h2 mdl-card-title-text>Register</h2>
     </mdl-card-title>
 
-    <mdl-card-supporting-text class="mdl-grid" *ngIf="user">
+    <mdl-card-supporting-text class="mdl-grid">
 
       <div class="mdl-cell mdl-cell--1-col"></div>
       <form class="mdl-cell mdl-cell--10-col">
 
-        {{ user | json }}
-
-        <mdl-textfield type="text" label="Firstname" floating-label [(ngModel)]="user.firstname"></mdl-textfield>
-        <mdl-textfield type="text" label="Lastname" floating-label [(ngModel)]="user.lastname"></mdl-textfield>
-        <mdl-textfield type="text" label="Email" floating-label [(ngModel)]="user.email"></mdl-textfield>
-        <mdl-textfield type="password" label="Password" floating-label [(ngModel)]="user.password"></mdl-textfield>
-        <mdl-textfield type="password" label="Repeat Password" floating-label [(ngModel)]="passwordRepeat"></mdl-textfield>
+        <mdl-textfield type="text" label="Firstname" name="firstname" floating-label [(ngModel)]="user.firstname"></mdl-textfield>
+        <mdl-textfield type="text" label="Lastname" name="lastname" floating-label [(ngModel)]="user.lastname"></mdl-textfield>
+        <mdl-textfield type="text" label="Email" name="email" floating-label [(ngModel)]="user.email"></mdl-textfield>
+        <mdl-textfield type="password" label="Password" name="password" floating-label [(ngModel)]="user.password"></mdl-textfield>
+        <mdl-textfield type="password" label="Repeat Password" name="passwordRepeat" floating-label [(ngModel)]="passwordRepeat"></mdl-textfield>
 
       </form>
     </mdl-card-supporting-text>
 
     <mdl-card-actions mdl-card-border class="mdl-grid">
       <div class="mdl-cell mdl-cell--1-col"></div>
-      <button mdl-button mdl-colored mdl-ripple class="mdl-cell mdl-cell--10-col">Sign Up</button>
+      <button mdl-button mdl-colored mdl-ripple class="mdl-cell mdl-cell--10-col" (click)="submitUser()">Sign Up</button>
     </mdl-card-actions>
   </mdl-card>
 
   <div class="mdl-cell mdl-cell--3-col"></div>
 
 </div>
-
-

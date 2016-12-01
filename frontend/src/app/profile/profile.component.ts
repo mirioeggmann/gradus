@@ -5,24 +5,23 @@ import {UserService} from "../shared/services/user/user.service";
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css'],
-  providers: [ UserService ]
+  styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
 
   constructor(private _UserService : UserService) { }
 
   errorMessage: string;
-  user : User;
+  users : User[];
 
-  getUser(){
-    this._UserService.getUser().subscribe(
-      user => this.user = user,
+  getUsers(){
+    this._UserService.getUsers().subscribe(
+      users => this.users = users,
       error =>  this.errorMessage = <any>error);
   };
 
   ngOnInit() {
-    this.getUser();
+    this.getUsers();
   }
 
 }

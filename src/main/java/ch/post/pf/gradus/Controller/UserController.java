@@ -3,7 +3,7 @@ package ch.post.pf.gradus.Controller;
 import ch.post.pf.gradus.Models.User;
 import ch.post.pf.gradus.Repositorys.UserRepo;
 import ch.post.pf.gradus.Response.Response;
-import ch.post.pf.gradus.ViewModel.User.UserRegistrationView;
+import ch.post.pf.gradus.ViewModel.User.UserView;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,41 +22,35 @@ public class UserController {
     @Autowired
     private UserRepo userRepo;
 
-    @RequestMapping(value = "webresources/user/register", method = RequestMethod.GET)
-    ResponseEntity<?> getRegisterUser() {
-
-        UserRegistrationView userView = new UserRegistrationView();
-
-        return new ResponseEntity<UserRegistrationView>(userView, HttpStatus.OK);
-
-    }
-
-    @RequestMapping(value = "webresources/user/register", method = RequestMethod.POST)
-    ResponseEntity<?> registerUser(@RequestBody UserRegistrationView userRegistration) {
+    @RequestMapping(value = "webresources/user/create", method = RequestMethod.POST)
+    public ResponseEntity<?> createUser(@RequestBody UserView userView) {
 
         Response registrationResponse = new Response();
 
-        registrationResponse.checkIfNull(userRegistration.getFirstname(), "Vorname nicht gesetzt");
-        registrationResponse.checkIfNull(userRegistration.getLastname(), "Nachname nicht gesetzt");
-        registrationResponse.checkIfNull(userRegistration.getBirthday().toString(), "Geburtstag nicht gesetzt");
+        registrationResponse.checkIfNull(userView.getFirstname(), "firstname is empty");
+        registrationResponse.checkIfNull(userView.getLastname(), "lastname is empty");
 
-        registrationResponse.checkIfNull(userRegistration.getEmail(), "E-Mail nicht gesetzt");
-        registrationResponse.checkIfNotEmail(userRegistration.getEmail(), "E-Mail ist kein gültiges Format");
+        registrationResponse.checkIfNull(userView.getEmail(), "email is empty");
+        registrationResponse.checkIfNotEmail(userView.getEmail(), "email in a not valid format");
 
-        registrationResponse.checkIfNull(userRegistration.getPassword(), "Passwort nicht gesetzt");
-        registrationResponse.checkIfNull(userRegistration.getPasswordRepeat(), "Wiederholung nicht gesetzt");
+        registrationResponse.checkIfNull(userView.getPassword(), "password is empty");
 
-        registrationResponse.checkIfNotEqual(userRegistration.getPassword(), userRegistration.getPasswordRepeat(), "Passwörter stimmen nicht überein");
-        registrationResponse.checkIfNotStrongPW(userRegistration.getPassword(), "Passwort zu schwach - haha noob");
+        registrationResponse.checkIfNotStrongPW(userView.getPassword(), "password to weak");
 
-        if (!registrationResponse.getState()) {
+        if(!registrationResponse.getState()) {
 
-            User user = mapper.map(userRegistration, User.class);
+            User sameEmailUser = userRepo.findByEmail(userView.getEmail());
+            registrationResponse.checkIfObjectNotNull(sameEmailUser, "email already used");
 
-            userRepo.save(user);
+            if(!registrationResponse.getState()) {
 
+                User user = mapper.map(userView, User.class);
+                userRepo.save(user);
+
+                registrationResponse.setMessage("User created");
+
+            }
         }
-
 
         return new ResponseEntity<Response>(registrationResponse, HttpStatus.OK);
 
@@ -64,14 +58,35 @@ public class UserController {
 
     @RequestMapping(value = "/webresources/user", method = RequestMethod.GET)
     public @ResponseBody
-    User getAllUser(){
+    List<User> getAllUser(){
 
-        User user = new User();
-        user.setLastname("Test");
-        user.setFirstname("MR.");
-        user.setEmail("manuel.bieri@post.ch");
+        List<User> users = userRepo.findAll();
 
-        return user;
+        return users;
+
+    }
+
+    @RequestMapping(value = "webresources/user/signin", method = RequestMethod.POST)
+    public ResponseEntity<?> signIn(@RequestBody UserView userView) {
+
+        Response response = new Response();
+
+        User user = userRepo.findByEmail(userView.getEmail());
+
+        response.checkIfObjectNull(user, "Email / Password not correct");
+
+        if(!response.getState()) {
+
+            response.checkIfNotEqual(user.getPassword(), userView.getPassword(), "Email / Password not correct");
+
+            if (!response.getState()) {
+
+                response.setMessage("valid logindata");
+
+            }
+        }
+
+        return new ResponseEntity<Response>(response, HttpStatus.OK);
 
     }
 
