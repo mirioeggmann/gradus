@@ -10,10 +10,10 @@
 - As a \<user type\>, I want to \<task\> so that \<goal\>.
 - As a customer, I want to create an account so that I can make purchases.
 
-<<<<<<< HEAD
 Kein supporthandbuch zurzeit nicht relevant
-=======
+
+Docs:
+https://www.dropbox.com/sh/4xcel47e5ui0vf9/AADmjGjQUeTcxgKSGOaWws7za?dl=0
 
 # Example Functional
 https://github.com/marco76/SpringAngular2TypeScript
->>>>>>> c3f0e574fd18fc5d3d518e415e257cfbcecad6a0
