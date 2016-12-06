@@ -1,18 +1,17 @@
 package ch.post.pf.gradus.Models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.validator.constraints.NotEmpty;
 
-import java.util.Collection;
+import java.util.*;
+import java.util.stream.Collectors;
+
 
 @Entity
 @Table (name = "GRAD_user")
-public class User implements UserDetails{
+public class User {
 
     @Id
     @GeneratedValue
@@ -24,6 +23,7 @@ public class User implements UserDetails{
 
     private String email;
 
+    @JsonIgnore
     private String password;
 
     public Long getId() {
@@ -58,38 +58,8 @@ public class User implements UserDetails{
         this.email = email;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
-
     public String getPassword() {
         return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return null;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return false;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return false;
     }
 
     public void setPassword(String password) {

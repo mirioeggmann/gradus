@@ -5,22 +5,22 @@
             <mdl-layout-title>{{title}}</mdl-layout-title>
             <mdl-layout-spacer></mdl-layout-spacer>
             <nav class="mdl-navigation mdl-layout--large-screen-only">
-               <a class="mdl-navigation__link" routerLink="/login" routerLinkActive="active" >Login</a>
-               <a class="mdl-navigation__link" routerLink="/register" routerLinkActive="active" >Register</a>
-               <a class="mdl-navigation__link" routerLink="/dashboard" routerLinkActive="active" >Dashboard</a>
-               <a class="mdl-navigation__link" routerLink="/profile" routerLinkActive="active" >Profile</a>
-               <a class="mdl-navigation__link" routerLink="/logout" routerLinkActive="active" >Logout</a>
+               <a class="mdl-navigation__link" routerLink="/login" routerLinkActive="active" *ngIf="!globalService.signedIn">Login</a>
+               <a class="mdl-navigation__link" routerLink="/register" routerLinkActive="active" *ngIf="!globalService.signedIn">Register</a>
+               <a class="mdl-navigation__link" routerLink="/dashboard" routerLinkActive="active" *ngIf="globalService.signedIn">Dashboard</a>
+               <a class="mdl-navigation__link" routerLink="/profile" routerLinkActive="active" *ngIf="globalService.signedIn">Profile</a>
+               <a class="mdl-navigation__link" (click)="logout()" routerLinkActive="active" *ngIf="globalService.signedIn">Logout</a>
             </nav>
          </mdl-layout-header-row>
       </mdl-layout-header>
       <mdl-layout-drawer>
          <mdl-layout-title>{{title}}</mdl-layout-title>
          <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" routerLink="/login" routerLinkActive="active">Login</a>
-            <a class="mdl-navigation__link" routerLink="/register" routerLinkActive="active" >Register</a>
-            <a class="mdl-navigation__link" routerLink="/dashboard" routerLinkActive="active" >Dashboard</a>
-            <a class="mdl-navigation__link" routerLink="/profile" routerLinkActive="active" >Profile</a>
-            <a class="mdl-navigation__link" routerLink="/logout" routerLinkActive="active" >Logout</a>
+           <a class="mdl-navigation__link" routerLink="/login" routerLinkActive="active" *ngIf="!globalService.signedIn">Login</a>
+           <a class="mdl-navigation__link" routerLink="/register" routerLinkActive="active" *ngIf="!globalService.signedIn">Register</a>
+           <a class="mdl-navigation__link" routerLink="/dashboard" routerLinkActive="active" *ngIf="globalService.signedIn">Dashboard</a>
+           <a class="mdl-navigation__link" routerLink="/profile" routerLinkActive="active" *ngIf="globalService.signedIn">Profile</a>
+           <a class="mdl-navigation__link" (click)="logout()" routerLinkActive="active" *ngIf="globalService.signedIn">Logout</a>
          </nav>
       </mdl-layout-drawer>
       <mdl-layout-content>

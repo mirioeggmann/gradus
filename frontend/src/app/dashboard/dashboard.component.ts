@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { IMdlTableModelItem, MdlDefaultTableModel } from '../../../node_modules/angular2-mdl'
 import {User} from "../shared/models/user.model";
 import {UserService} from "../shared/services/user/user.service";
+import {GlobalService} from "../shared/global.service";
 
 export interface ITableItem extends IMdlTableModelItem {
   subject: string;
@@ -31,7 +32,8 @@ export class DashboardComponent implements OnInit {
            {key:'average', name:'Average', numeric:true}
         ]);
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
     this.tableModel.addAll(this.tableData);
