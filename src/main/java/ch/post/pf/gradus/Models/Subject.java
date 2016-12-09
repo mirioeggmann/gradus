@@ -12,10 +12,6 @@ public class Subject {
 
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "creator_Id")
-    private User creator;
-
     public Long getId() {
         return id;
     }
@@ -30,14 +26,6 @@ public class Subject {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public User getCreator() {
-        return creator;
-    }
-
-    public void setCreator(User creator) {
-        this.creator = creator;
     }
 
 }

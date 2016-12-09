@@ -48,7 +48,7 @@ public class UserController {
                 User user = mapper.map(userView, User.class);
                 userRepo.save(user);
 
-                registrationResponse.setMessage("User created");
+                registrationResponse.setMessage(user.getId().toString());
 
             }
         }
@@ -65,6 +65,19 @@ public class UserController {
 
         return users;
 
+    }
+
+    @RequestMapping(value = "webresources/user/{id}", method = RequestMethod.GET)
+    public ResponseEntity<?>  one(@PathVariable String id) {
+        if(id!="" && id.matches("\\d*"))
+        {
+            Long longId = Long.valueOf(id);
+            User user = userRepo.findOne(longId);
+            if(user!=null) {
+                return new ResponseEntity<User>(user, HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
     @RequestMapping(value = "webresources/user/signin", method = RequestMethod.POST)

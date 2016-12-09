@@ -13,8 +13,8 @@ public class Semester {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "subject_Id")
-    private Subject subject;
+    @JoinColumn(name = "creator_Id")
+    private User creator;
 
     private Long start;
 
@@ -52,12 +52,12 @@ public class Semester {
         this.end = end;
     }
 
-    public Subject getSubject() {
-        return subject;
+    public User getCreator() {
+        return creator;
     }
 
-    public void setSubject(Subject subject) {
-        this.subject = subject;
+    public void setCreator(User creator) {
+        this.creator = creator;
     }
 
 }

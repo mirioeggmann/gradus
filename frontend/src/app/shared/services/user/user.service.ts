@@ -23,6 +23,17 @@ export class UserService {
       .catch(this.handleError);
   }
 
+  getUser(id: number): Observable<User> {
+    let options = new RequestOptions(
+      { headers: new Headers(
+        {'Content-Type': 'application/json'})
+      });
+
+    return this.http.get(this.baseUrl + "/" + id, options)
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
 
   addUser(body: Object): Observable<User> {
     let bodyString = JSON.stringify(body); // Stringify payload

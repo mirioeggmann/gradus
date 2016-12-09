@@ -1,0 +1,12 @@
+table {
+  width: 100%;
+}
+
+header {
+  height: auto;
+  min-height: 0;
+}
+
+header div.mdl-layout__tab-bar {
+  height: auto;
+}

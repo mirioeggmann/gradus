@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { IMdlTableModelItem, MdlDefaultTableModel } from '../../../node_modules/angular2-mdl'
-import {User} from "../shared/models/user.model";
-import {UserService} from "../shared/services/user/user.service";
 import {GlobalService} from "../shared/global.service";
+import {User} from "../shared/models/user.model";
+import {Semester} from "../shared/models/semester.model";
 
 export interface ITableItem extends IMdlTableModelItem {
   subject: string;
@@ -32,12 +32,27 @@ export class DashboardComponent implements OnInit {
            {key:'average', name:'Average', numeric:true}
         ]);
 
+  user : User = new User();
+  semesters: Semester[] = [
+    new Semester(1, "1. Semester", 1),
+    new Semester(2, "2. Semester", 1),
+    new Semester(3, "3. Semester", 1)
+  ];
+
+
+  semesterControl = {
+    active: "allGrades",
+
+  };
+
+
   constructor() {
   }
 
   ngOnInit() {
     this.tableModel.addAll(this.tableData);
     this.selected = this.tableData.filter( data => data.selected);
+    this.user.firstname = "Manuel";
   }
 
 }

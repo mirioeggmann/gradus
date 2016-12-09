@@ -24,6 +24,10 @@ public class Grade {
     @JoinColumn(name = "semester_Id")
     private Semester semester;
 
+    @ManyToOne
+    @JoinColumn(name = "subject_Id")
+    private Subject subject;
+
     public Long getId() {
         return id;
     }
@@ -80,4 +84,11 @@ public class Grade {
         this.semester = semester;
     }
 
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from "../shared/models/user.model";
 import {UserService} from "../shared/services/user/user.service";
+import {GlobalService} from "../shared/global.service";
 
 @Component({
   selector: 'app-profile',
@@ -9,19 +10,46 @@ import {UserService} from "../shared/services/user/user.service";
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private _UserService : UserService) { }
+  constructor(private _UserService : UserService, private globalService : GlobalService) { }
 
   errorMessage: string;
-  users : User[];
+  user : User = new User();
+
+  editingOptions = {
+    editIcon: "edit",
+    submitIcon: "done",
+    isEditing: false,
+  };
+
+  subjects = [
+    { name: "Mathematik" },
+    { name: "Deutsch" },
+    { name: "Englisch" },
+    { name: "M306" },
+    { name: "M946" },
+    { name: "M947" },
+  ];
+
+
+  changeEditState() {
+    if (!this.editingOptions.isEditing) {}
+    this.editingOptions.isEditing = !this.editingOptions.isEditing;
+  }
+
+
+  getUser() {
+    this._UserService.getUser(this.globalService.userID).subscribe(
+      user => this.user = user);
+  }
 
   getUsers(){
     this._UserService.getUsers().subscribe(
-      users => this.users = users,
+      // users => this.users = users,
       error =>  this.errorMessage = <any>error);
   };
 
   ngOnInit() {
-    this.getUsers();
+    this.getUser();
   }
 
 }

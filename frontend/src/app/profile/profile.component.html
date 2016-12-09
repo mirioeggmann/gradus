@@ -1,11 +1,110 @@
-<p *ngIf="users">
-  profile works!<br>
-</p>
-
-<div *ngFor="let user of users">
+<!--<div *ngFor="let user of users">
   ID: {{ user.id }}<br>
   Firstname: {{ user.firstname }}<br>
   lastname: {{ user.lastname }}<br>
   email: {{ user.email }}<br>
   <br>
+</div>-->
+
+<div class="mdl-grid">
+
+  <mdl-card mdl-shadow="2" class="mdl-cell mdl-cell--8-col">
+    <mdl-card-title>
+      <h2 class="mdl-cell--12-col" mdl-card-title-text>User information</h2>
+    </mdl-card-title>
+
+    <mdl-card-supporting-text class="mdl-grid">
+
+      <div class="mdl-cell--12-col" *ngIf="!editingOptions.isEditing">
+
+        <ul class="mdl-list">
+          <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+            firstname: {{ user.firstname }}
+            </span>
+          </li>
+          <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+              lastname: {{ user.lastname }}
+            </span>
+          </li>
+          <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+              email: {{ user.email }}
+            </span>
+          </li>
+        </ul>
+
+      </div>
+
+      <form class="mdl-cell--12-col" *ngIf="editingOptions.isEditing">
+
+        <mdl-textfield class="mdl-cell--12-col" type="text" label="Firstname" name="firstname" floating-label
+                       [(ngModel)]="user.firstname"></mdl-textfield>
+        <mdl-textfield class="mdl-cell--12-col" type="text" label="Lastname" name="lastname" floating-label
+                       [(ngModel)]="user.lastname"></mdl-textfield>
+        <mdl-textfield class="mdl-cell--12-col" type="text" label="Email" name="email" floating-label
+                       [(ngModel)]="user.email"></mdl-textfield>
+
+      </form>
+
+    </mdl-card-supporting-text>
+
+  </mdl-card>
+
+  <mdl-card mdl-shadow="2" class="mdl-cell mdl-cell--4-col">
+    <mdl-card-title>
+      <h2 mdl-card-title-text>Actions</h2>
+    </mdl-card-title>
+
+    <mdl-card-supporting-text class="mdl-grid">
+
+
+      <div class="mdl-cell--6-col mdl-grid">
+        <div class="mdl-layout-spacer"></div>
+        <div class="mdl-cell--6-col">
+          <button class="mdl-button mdl-js-button mdl-button--fab" (click)="changeEditState()">
+            <i class="material-icons" *ngIf="!editingOptions.isEditing">{{ editingOptions.editIcon }}</i>
+            <i class="material-icons" *ngIf="editingOptions.isEditing">{{ editingOptions.submitIcon }}</i>
+          </button>
+        </div>
+        <div class="mdl-layout-spacer"></div>
+      </div>
+
+      <div class="mdl-cell--6-col mdl-grid">
+        <div class="mdl-layout-spacer"></div>
+        <div class="mdl-cell--6-col">
+          <button class="mdl-button mdl-js-button mdl-button--fab">
+            <i class="material-icons">delete</i>
+          </button>
+        </div>
+        <div class="mdl-layout-spacer"></div>
+      </div>
+
+    </mdl-card-supporting-text>
+
+  </mdl-card>
+
+  <div class="mdl-cell--2-col"></div>
+
+  <mdl-card mdl-shadow="2" class="mdl-cell mdl-cell--8-col">
+    <mdl-card-title>
+      <h2 class="mdl-cell--12-col" mdl-card-title-text>Subjects</h2>
+    </mdl-card-title>
+
+    <mdl-card-supporting-text class="mdl-grid">
+
+      <div class="mdl-cell--3-col" *ngFor="let subject of subjects">
+
+        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" attr.for="{{subject.name}}">
+          <input type="checkbox" [id]="subject.name" class="mdl-checkbox__input">
+          <span class="mdl-checkbox__label">{{ subject.name }}</span>
+        </label>
+
+      </div>
+
+    </mdl-card-supporting-text>
+
+  </mdl-card>
+
 </div>

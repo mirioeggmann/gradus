@@ -10,6 +10,9 @@ import {Router} from "@angular/router";
 export class AppComponent {
 
   constructor(public globalService : GlobalService, private router: Router) {
+    globalService.signedIn = true;
+    globalService.userID = 1;
+    router.navigateByUrl("/profile");
   }
 
   logout(){
