@@ -17,6 +17,8 @@ import { GradesComponent } from './dashboard/grades/grades.component';
 import { SubjectsComponent } from './dashboard/subjects/subjects.component';
 import { SubjectDetailComponent } from './dashboard/subject-detail/subject-detail.component';
 import {UserService} from "./shared/services/user/user.service";
+import {GlobalService} from "./shared/global.service";
+import {AuthGuard} from "./AuthGuard";
 import { SubjectService } from "./shared/services/subject/subject.service";
 
 @NgModule({
@@ -41,7 +43,7 @@ import { SubjectService } from "./shared/services/subject/subject.service";
     DataTableModule,
     SharedModule
   ],
-  providers: [UserService, SubjectService],
+  providers: [UserService, GlobalService, AuthGuard, SubjectService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

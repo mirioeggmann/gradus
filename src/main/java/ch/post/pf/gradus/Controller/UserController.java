@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -39,7 +40,7 @@ public class UserController {
 
         if(!registrationResponse.getState()) {
 
-            User sameEmailUser = userRepo.findByEmail(userView.getEmail());
+            User sameEmailUser = userRepo.findOneByEmail(userView.getEmail());
             registrationResponse.checkIfObjectNotNull(sameEmailUser, "email already used");
 
             if(!registrationResponse.getState()) {
@@ -71,23 +72,22 @@ public class UserController {
 
         Response response = new Response();
 
-        User user = userRepo.findByEmail(userView.getEmail());
+        User user = userRepo.findOneByEmail(userView.getEmail());
 
         response.checkIfObjectNull(user, "Email / Password not correct");
 
-        if(!response.getState()) {
+        if (!response.getState()) {
 
             response.checkIfNotEqual(user.getPassword(), userView.getPassword(), "Email / Password not correct");
 
             if (!response.getState()) {
 
-                response.setMessage("valid logindata");
+                response.setMessage(user.getId().toString());
 
             }
         }
 
         return new ResponseEntity<Response>(response, HttpStatus.OK);
-
     }
 
 }
