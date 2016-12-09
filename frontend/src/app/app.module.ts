@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { MdlModule } from '../../node_modules/angular2-mdl';
+// import { DataTableModule, SharedModule } from 'primeng/primeng';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule, routedComponents } from './app-routing.module';
@@ -18,6 +19,7 @@ import { SubjectDetailComponent } from './dashboard/subject-detail/subject-detai
 import {UserService} from "./shared/services/user/user.service";
 import {GlobalService} from "./shared/global.service";
 import {AuthGuard} from "./AuthGuard";
+import { SubjectService } from "./shared/services/subject/subject.service";
 
 @NgModule({
   declarations: [
@@ -37,9 +39,11 @@ import {AuthGuard} from "./AuthGuard";
     FormsModule,
     HttpModule,
     MdlModule,
-    AppRoutingModule
+    AppRoutingModule,
+    // DataTableModule,
+    // SharedModule
   ],
-  providers: [UserService, GlobalService, AuthGuard],
+  providers: [UserService, GlobalService, AuthGuard, SubjectService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
