@@ -1,14 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { IMdlTableModelItem, MdlDefaultTableModel } from '../../../node_modules/angular2-mdl'
-import {User} from "../shared/models/user.model";
-import {UserService} from "../shared/services/user/user.service";
-
-export interface ITableItem extends IMdlTableModelItem {
-  subject: string;
-  weight: number;
-  average: number
-}
+import { Subject } from '../shared/models/subject';
+import {SubjectService} from "../shared/services/subject/subject.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -17,25 +10,15 @@ export interface ITableItem extends IMdlTableModelItem {
 })
 export class DashboardComponent implements OnInit {
 
-  tableData:[ITableItem] = [
-         {subject:'French', weight:1, average:5.25, selected:true},
-         {subject:'German', weight:1, average:4.0, selected:false},
-         {subject:'Math', weight:2, average:6, selected:false}
-      ];
+  errorMessage: string;
+  subjects: Subject[];
 
-  selected:Array<ITableItem> = new Array<ITableItem>();
-
-  public tableModel = new MdlDefaultTableModel([
-           {key:'subject', name:'Subject', sortable:true},
-           {key:'weight', name:'Weight', sortable:true, numeric:true},
-           {key:'average', name:'Average', numeric:true}
-        ]);
-
-  constructor() { }
+  constructor(private _SubjectService : SubjectService) { }
 
   ngOnInit() {
-    this.tableModel.addAll(this.tableData);
-    this.selected = this.tableData.filter( data => data.selected);
+    this._SubjectService.getSubjects().subscribe(
+      subjects => this.subjects = subjects,
+      error =>  this.errorMessage = <any>error);
   }
 
 }
