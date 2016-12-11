@@ -5,7 +5,7 @@
 
 Early 2017 it will be available at https://gradus.mirioeggmann.ch or you will be able to set it up on your own server.
 
-## School docs:
+## School docs (german):
 https://www.dropbox.com/sh/4xcel47e5ui0vf9/AADmjGjQUeTcxgKSGOaWws7za?dl=0
 
 ## Some specs:
@@ -13,3 +13,5 @@ https://www.dropbox.com/sh/4xcel47e5ui0vf9/AADmjGjQUeTcxgKSGOaWws7za?dl=0
 - backend: spring boot
 - db: mysql
 
+## License
+See [LICENSE](LICENSE)
