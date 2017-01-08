@@ -10,8 +10,9 @@
     <mdl-card-title>
       <h2 mdl-card-title-text>Welcome, {{user.firstname}}!</h2>
       <div class="mdl-layout-spacer"></div>
-      <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" routerLink="/semester/new">
+      <button class="mdl-button mdl-js-button mdl-button--raised" routerLink="/semester/new" style="padding-left: 10px">
         <i class="material-icons">add</i>
+        Semester
       </button>
     </mdl-card-title>
 
@@ -38,10 +39,10 @@
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <td class="mdl-data-table__cell--non-numeric">Acrylic (Transparent)</td>
-            <td>25</td>
-            <td>$2.90</td>
+          <tr *ngFor="let grade of grades">
+            <td class="mdl-data-table__cell--non-numeric">{{ grade.name }}</td>
+            <td>{{ grade.weight }}</td>
+            <td>{{ grade.grade }}</td>
             <td>
               <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">
                 <i class="material-icons">edit</i>
@@ -52,8 +53,8 @@
             </td>
           </tr>
           <tr>
-            <td colspan="100">
-              <button class="mdl-button mdl-js-button mdl-button--raised">
+            <td colspan="100" class="button-td">
+              <button class="mdl-button mdl-js-button mdl-button--primary td-button" routerLink="/grade/new">
                 <i class="material-icons">add</i>
               </button>
             </td>

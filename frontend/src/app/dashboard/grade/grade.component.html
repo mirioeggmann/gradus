@@ -15,9 +15,9 @@
         <mdl-textfield class="mdl-cell mdl-cell--12-col" type="text" label="Name" name="name" floating-label [(ngModel)]="grade.name"></mdl-textfield>
         <mdl-textfield class="mdl-cell mdl-cell--12-col" type="number" label="Grade" name="grade" floating-label [(ngModel)]="grade.grade"></mdl-textfield>
         <mdl-textfield class="mdl-cell mdl-cell--12-col" type="number" label="Weight" name="weight" floating-label [(ngModel)]="grade.weight"></mdl-textfield>
-        <mdl-textfield class="mdl-cell mdl-cell--12-col" type="text" label="WritingDate" name="writingDate" floating-label [(ngModel)]="writingDateString"></mdl-textfield>
+        <mdl-textfield class="mdl-cell mdl-cell--12-col" type="text" label="WritingDate" name="writingDate" floating-label [(ngModel)]="dateString"></mdl-textfield>
         <mdl-textfield class="mdl-cell mdl-cell--12-col" type="text" label="Description" name="description" floating-label [(ngModel)]="grade.description"></mdl-textfield>
-        {{ semester | json }}
+        {{ grade | json }}
 
       </form>
       <div class="mdl-cell mdl-cell--1-col"></div>

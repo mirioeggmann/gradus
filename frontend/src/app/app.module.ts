@@ -22,6 +22,7 @@ import {AuthGuard} from "./AuthGuard";
 import { SubjectService } from "./shared/services/subject/subject.service";
 import { SemesterComponent } from './dashboard/semester/semester.component';
 import {SemesterService} from "./shared/services/semester/semester.service";
+import {GradeService} from "./shared/services/grade/grade.service";
 
 @NgModule({
   declarations: [
@@ -46,7 +47,7 @@ import {SemesterService} from "./shared/services/semester/semester.service";
     // DataTableModule,
     // SharedModule
   ],
-  providers: [UserService, GlobalService, AuthGuard, SubjectService, SemesterService],
+  providers: [GlobalService, AuthGuard, SubjectService, SemesterService, GradeService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

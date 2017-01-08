@@ -10,9 +10,11 @@ export interface ITableItem extends IMdlTableModelItem {
   weight: number;
   average: number
 }
-import { Subject } from '../shared/models/subject';
+import { Subject } from '../shared/models/subject.model';
 import {SubjectService} from "../shared/services/subject/subject.service";
 import {SemesterService} from "../shared/services/semester/semester.service";
+import {Grade} from "../shared/models/grade.model";
+import {GradeService} from "../shared/services/grade/grade.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -21,10 +23,10 @@ import {SemesterService} from "../shared/services/semester/semester.service";
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private _SubjectService : SubjectService, private _SemesterService : SemesterService) { }
+  constructor(private subjectService : SubjectService, private semesterService : SemesterService, private gradeService : GradeService) { }
 
   errorMessage: string;
-  subjects: Subject[];
+
 
   selected:Array<ITableItem> = new Array<ITableItem>();
 
@@ -37,11 +39,18 @@ export class DashboardComponent implements OnInit {
   user : User = new User();
 
   getSemesters(){
-    this._SemesterService.getSemesters().subscribe(
+    this.semesterService.getSemesters().subscribe(
       semesters => this.semesters = semesters,
-      error =>  this.errorMessage = <any>error);
+      error =>  this.errorMessage += <any>error);
   };
   semesters: Semester[];
+
+  getGrades(){
+    this.gradeService.getGrades().subscribe(
+      grades => this.grades = grades,
+      error => this.errorMessage += <any>error);
+  }
+  grades: Grade[];
 
   semesterControl = {
     active: "allGrades",
@@ -49,11 +58,10 @@ export class DashboardComponent implements OnInit {
   };
 
   ngOnInit() {
-    this._SubjectService.getSubjects().subscribe(
-      subjects => this.subjects = subjects,
-      error =>  this.errorMessage = <any>error);
+
     this.user.firstname = "Manuel";
     this.getSemesters();
+    this.getGrades();
   }
 
 }

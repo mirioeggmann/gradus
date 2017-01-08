@@ -13,10 +13,11 @@ export class SemesterComponent implements OnInit {
 
   constructor(private globalService : GlobalService, private semesterService : SemesterService, private router : Router) { }
 
+  title = "new Semester";
   semester: Semester = new Semester();
   startString: string;
   endString: string;
-  errors : string[];
+  errors: string[];
 
   submitSemester(){
 
