@@ -26,7 +26,14 @@ export class LoginComponent implements OnInit {
       response => {
         if (response["errors"].length == 0) {
           this.globalService.signedIn = true;
-          this.globalService.userID = +response["message"];
+          this.userService.getUser(+response["message"]).subscribe(
+            response => {
+              this.globalService.signedUser = response;
+            },
+            err => {
+              console.log(err);
+            }
+          );
           this.router.navigateByUrl("/dashboard");
         } else {
           this.errors = response["errors"];

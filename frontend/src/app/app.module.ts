@@ -13,13 +13,15 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
 import { GradeDetailComponent } from './dashboard/grade-detail/grade-detail.component';
-import { GradesComponent } from './dashboard/grades/grades.component';
+import { GradeComponent } from './dashboard/grade/grade.component';
 import { SubjectsComponent } from './dashboard/subjects/subjects.component';
 import { SubjectDetailComponent } from './dashboard/subject-detail/subject-detail.component';
 import {UserService} from "./shared/services/user/user.service";
 import {GlobalService} from "./shared/global.service";
 import {AuthGuard} from "./AuthGuard";
 import { SubjectService } from "./shared/services/subject/subject.service";
+import { SemesterComponent } from './dashboard/semester/semester.component';
+import {SemesterService} from "./shared/services/semester/semester.service";
 
 @NgModule({
   declarations: [
@@ -30,9 +32,10 @@ import { SubjectService } from "./shared/services/subject/subject.service";
     DashboardComponent,
     ProfileComponent,
     GradeDetailComponent,
-    GradesComponent,
     SubjectsComponent,
-    SubjectDetailComponent
+    SubjectDetailComponent,
+    SemesterComponent,
+    GradeComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,7 @@ import { SubjectService } from "./shared/services/subject/subject.service";
     // DataTableModule,
     // SharedModule
   ],
-  providers: [UserService, GlobalService, AuthGuard, SubjectService],
+  providers: [UserService, GlobalService, AuthGuard, SubjectService, SemesterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

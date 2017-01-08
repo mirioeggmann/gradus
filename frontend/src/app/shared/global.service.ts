@@ -1,11 +1,12 @@
 import {Component, Injectable,Input,Output,EventEmitter} from '@angular/core'
+import {User} from "./models/user.model";
 
 @Injectable()
 export class GlobalService {
   @Output() fire: EventEmitter<any> = new EventEmitter();
 
   private _signedIn: boolean = false;
-  private _userID: number;
+  private _signedUser: User;
 
   constructor() { }
 
@@ -18,11 +19,11 @@ export class GlobalService {
     this._signedIn = value;
   }
 
-  get userID(): number {
-    return this._userID;
+  get signedUser(): User {
+    return this._signedUser;
   }
 
-  set userID(value: number) {
-    this._userID = value;
+  set signedUser(value: User) {
+    this._signedUser = value;
   }
 }

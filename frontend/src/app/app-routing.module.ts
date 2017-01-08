@@ -4,8 +4,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { SemesterComponent } from './dashboard/semester/semester.component';
 import { ProfileComponent } from './profile/profile.component';
 import {AuthGuard} from "./AuthGuard";
+import {GradeComponent} from "./dashboard/grade/grade.component";
 
 const appRoutes: Routes = [
   {
@@ -17,6 +19,16 @@ const appRoutes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'semester/new',
+    component: SemesterComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'grade/new',
+    component: GradeComponent,
     canActivate: [AuthGuard]
   },
   {

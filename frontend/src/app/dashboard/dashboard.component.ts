@@ -12,6 +12,7 @@ export interface ITableItem extends IMdlTableModelItem {
 }
 import { Subject } from '../shared/models/subject';
 import {SubjectService} from "../shared/services/subject/subject.service";
+import {SemesterService} from "../shared/services/semester/semester.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -19,6 +20,8 @@ import {SubjectService} from "../shared/services/subject/subject.service";
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+
+  constructor(private _SubjectService : SubjectService, private _SemesterService : SemesterService) { }
 
   errorMessage: string;
   subjects: Subject[];
@@ -32,26 +35,25 @@ export class DashboardComponent implements OnInit {
         ]);
 
   user : User = new User();
-  semesters: Semester[] = [
-    new Semester(1, "1. Semester", 1),
-    new Semester(2, "2. Semester", 1),
-    new Semester(3, "3. Semester", 1)
-  ];
 
+  getSemesters(){
+    this._SemesterService.getSemesters().subscribe(
+      semesters => this.semesters = semesters,
+      error =>  this.errorMessage = <any>error);
+  };
+  semesters: Semester[];
 
   semesterControl = {
     active: "allGrades",
 
   };
 
-
-  constructor(private _SubjectService : SubjectService) { }
-
   ngOnInit() {
     this._SubjectService.getSubjects().subscribe(
       subjects => this.subjects = subjects,
       error =>  this.errorMessage = <any>error);
     this.user.firstname = "Manuel";
+    this.getSemesters();
   }
 
 }

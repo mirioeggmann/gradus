@@ -11,8 +11,7 @@ import 'rxjs/add/operator/catch'
 @Injectable()
 export class UserService {
 
-  constructor(private http: Http) {
-  }
+  constructor(private http: Http) {}
 
   private baseUrl = 'http://localhost:8080/webresources/user';  // URL to web api
 

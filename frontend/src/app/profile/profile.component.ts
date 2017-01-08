@@ -38,7 +38,7 @@ export class ProfileComponent implements OnInit {
 
 
   getUser() {
-    this._UserService.getUser(this.globalService.userID).subscribe(
+    this._UserService.getUser(this.globalService.signedUser.id).subscribe(
       user => this.user = user);
   }
 
