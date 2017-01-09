@@ -27,12 +27,12 @@ export class RegisterComponent implements OnInit {
               this.userService.getUser(+response["message"]).subscribe(
                 response => {
                   this.globalService.signedUser = response;
+                  this.router.navigateByUrl("/dashboard");
                 },
                 err => {
                   console.log(err);
                 }
               );
-              this.router.navigateByUrl("/dashboard");
             } else {
               this.errors = response["errors"];
             }

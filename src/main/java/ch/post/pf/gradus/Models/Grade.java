@@ -28,6 +28,10 @@ public class Grade {
     @JoinColumn(name = "subject_Id")
     private Subject subject;
 
+    @ManyToOne
+    @JoinColumn(name = "creator_Id")
+    private User creator;
+
     public Long getId() {
         return id;
     }
@@ -90,5 +94,13 @@ public class Grade {
 
     public void setSubject(Subject subject) {
         this.subject = subject;
+    }
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
     }
 }

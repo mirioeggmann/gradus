@@ -13,10 +13,21 @@
       <form class="mdl-cell mdl-cell--10-col">
 
         <mdl-textfield class="mdl-cell mdl-cell--12-col" type="text" label="Name" name="name" floating-label [(ngModel)]="grade.name"></mdl-textfield>
-        <mdl-textfield class="mdl-cell mdl-cell--12-col" type="number" label="Grade" name="grade" floating-label [(ngModel)]="grade.grade"></mdl-textfield>
-        <mdl-textfield class="mdl-cell mdl-cell--12-col" type="number" label="Weight" name="weight" floating-label [(ngModel)]="grade.weight"></mdl-textfield>
+        <mdl-textfield class="mdl-cell mdl-cell--12-col" type="number" pattern="^[1-6]$" label="Grade" name="grade" floating-label [(ngModel)]="grade.grade"></mdl-textfield>
+        <mdl-textfield class="mdl-cell mdl-cell--12-col" type="text" pattern="^\d+(\.\d{1,2})?$" label="Weight" name="weight" floating-label [(ngModel)]="grade.weight"></mdl-textfield>
         <mdl-textfield class="mdl-cell mdl-cell--12-col" type="text" label="WritingDate" name="writingDate" floating-label [(ngModel)]="dateString"></mdl-textfield>
         <mdl-textfield class="mdl-cell mdl-cell--12-col" type="text" label="Description" name="description" floating-label [(ngModel)]="grade.description"></mdl-textfield>
+
+        <div class="mdl-cell mdl-cell--12-col">
+          <select [(ngModel)]="grade.subject" name="subject">
+            <option value="" selected disabled>Select semester</option>
+            <option [value]="subject" *ngFor="let subject of subjects">Saab</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="audi">Audi</option>
+          </select>
+          {{ subjects | json }}
+        </div>
+
         {{ grade | json }}
 
       </form>
@@ -32,7 +43,7 @@
 
     <mdl-card-actions mdl-card-border class="mdl-grid">
       <div class="mdl-cell mdl-cell--1-col"></div>
-      <button mdl-button mdl-colored mdl-ripple class="mdl-cell mdl-cell--10-col" (click)="submitSemester()">Create</button>
+      <button mdl-button mdl-colored mdl-ripple class="mdl-cell mdl-cell--10-col" (click)="submitGrade()">Create</button>
     </mdl-card-actions>
   </mdl-card>
 

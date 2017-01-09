@@ -26,6 +26,10 @@ public class SemesterController {
     @Autowired
     private SemesterRepo semesterRepo;
 
+    @Autowired
+    private UserRepo userRepo;
+
+
     @RequestMapping(value = "webresources/semester/create", method = RequestMethod.POST)
     public ResponseEntity<?> createSemester(@RequestBody SemesterView semesterView) {
 
@@ -39,20 +43,20 @@ public class SemesterController {
 
     }
 
-    @RequestMapping(value = "/webresources/semester", method = RequestMethod.GET)
-    public @ResponseBody
-    List<Semester> getAllSemester(){
+    @RequestMapping(value = "/webresources/semester/{userID}", method = RequestMethod.GET)
+    public ResponseEntity<?> all(@PathVariable Long userID) {
 
-        List<Semester> semesters = semesterRepo.findAll();
+        User creator = userRepo.findOne(userID);
+        List<Semester> semesters = semesterRepo.findAllByCreator(creator);
         if (semesters.size() > 0) {
-            return semesters;
+            return new ResponseEntity<List<Semester>>(semesters, HttpStatus.OK);
         } else {
-            return Collections.emptyList();
+            return new ResponseEntity<List<Semester>>(Collections.emptyList(), HttpStatus.NOT_FOUND);
         }
 
     }
 
-    @RequestMapping(value = "webresources/semester/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "webresources/semester/one/{id}", method = RequestMethod.GET)
     public ResponseEntity<?>  one(@PathVariable String id) {
         if(id!="" && id.matches("\\d*"))
         {

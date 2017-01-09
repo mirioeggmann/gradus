@@ -23,6 +23,7 @@ import { SubjectService } from "./shared/services/subject/subject.service";
 import { SemesterComponent } from './dashboard/semester/semester.component';
 import {SemesterService} from "./shared/services/semester/semester.service";
 import {GradeService} from "./shared/services/grade/grade.service";
+import {ApiService} from "./shared/services/api.service";
 
 @NgModule({
   declarations: [

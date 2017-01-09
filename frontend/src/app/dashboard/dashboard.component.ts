@@ -23,7 +23,8 @@ import {GradeService} from "../shared/services/grade/grade.service";
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private subjectService : SubjectService, private semesterService : SemesterService, private gradeService : GradeService) { }
+  constructor(private globalService : GlobalService, private subjectService : SubjectService,
+              private semesterService : SemesterService, private gradeService : GradeService) { }
 
   errorMessage: string;
 
@@ -59,7 +60,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
 
-    this.user.firstname = "Manuel";
+    this.user.firstname = this.globalService.signedUser.firstname;
     this.getSemesters();
     this.getGrades();
   }

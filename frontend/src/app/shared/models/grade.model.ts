@@ -1,5 +1,6 @@
 import {Semester} from "./semester.model";
 import {Subject} from "./subject.model";
+import {User} from "./user.model";
 
 export class Grade{
 
@@ -13,6 +14,6 @@ export class Grade{
   description: string;
   semester: Semester;
   subject: Subject;
-
+  creator: User;
 
 }

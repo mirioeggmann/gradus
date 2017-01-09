@@ -1,19 +1,15 @@
-package ch.post.pf.gradus.Models;
+package ch.post.pf.gradus.ViewModel;
 
-import javax.persistence.*;
 
-@Entity
-@Table(name = "GRAD_subject")
-public class Subject {
+import ch.post.pf.gradus.Models.User;
+import ch.post.pf.gradus.ViewModel.User.UserView;
 
-    @Id
-    @GeneratedValue
+public class SubjectView {
+
     private Long id;
 
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "creator_Id")
     private User creator;
 
     public Long getId() {
@@ -32,12 +28,13 @@ public class Subject {
         this.name = name;
     }
 
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
+
     public User getCreator() {
         return creator;
     }
 
-    public void setCreator(User creator) {
-        this.creator = creator;
-    }
 
 }

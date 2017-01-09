@@ -1,6 +1,8 @@
 package ch.post.pf.gradus.ViewModel;
 
 
+import ch.post.pf.gradus.Models.User;
+
 public class GradeView {
 
     private String name;
@@ -12,6 +14,8 @@ public class GradeView {
     private Long date;
 
     private String description;
+
+    private User creator;
 
     public String getName() {
         return name;
@@ -53,4 +57,11 @@ public class GradeView {
         this.description = description;
     }
 
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
 }
