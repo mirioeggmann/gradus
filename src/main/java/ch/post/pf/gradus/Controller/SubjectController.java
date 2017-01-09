@@ -51,7 +51,7 @@ public class SubjectController {
         if (subjects.size() > 0) {
             return new ResponseEntity<List<Subject>>(subjects, HttpStatus.OK);
         } else {
-            return new ResponseEntity<List<Subject>>(Collections.emptyList(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<List<Subject>>(Collections.emptyList(), HttpStatus.OK);
         }
 
     }

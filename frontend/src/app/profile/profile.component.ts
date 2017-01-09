@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {User} from "../shared/models/user.model";
 import {UserService} from "../shared/services/user/user.service";
 import {GlobalService} from "../shared/global.service";
+import {Subject} from "../shared/models/subject.model";
+import {SubjectService} from "../shared/services/subject/subject.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-profile',
@@ -10,10 +13,11 @@ import {GlobalService} from "../shared/global.service";
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private _UserService : UserService, private globalService : GlobalService) { }
+  constructor(private _UserService : UserService, private globalService : GlobalService, private subjectService : SubjectService, private router : Router) { }
 
-  errorMessage: string;
-  user : User = new User();
+  user : User = this.globalService.signedUser;
+  subject : Subject = new Subject();
+  errors: string[];
 
   editingOptions = {
     editIcon: "edit",
@@ -21,35 +25,52 @@ export class ProfileComponent implements OnInit {
     isEditing: false,
   };
 
-  subjects = [
-    { name: "Mathematik" },
-    { name: "Deutsch" },
-    { name: "Englisch" },
-    { name: "M306" },
-    { name: "M946" },
-    { name: "M947" },
-  ];
-
+  getSubjects(){
+    this.subjectService.getSubjects().subscribe(
+      subjects => this.subjects = subjects,
+      error =>  this.errors += <any>error);
+  };
+  subjects : Subject[];
 
   changeEditState() {
     if (!this.editingOptions.isEditing) {}
     this.editingOptions.isEditing = !this.editingOptions.isEditing;
   }
 
-
   getUser() {
     this._UserService.getUser(this.globalService.signedUser.id).subscribe(
       user => this.user = user);
   }
 
-  getUsers(){
-    this._UserService.getUsers().subscribe(
-      // users => this.users = users,
-      error =>  this.errorMessage = <any>error);
-  };
+  submitSubject(){
+
+    this.subjectService
+      .createSubject(this.subject).subscribe(
+      response => {
+        if (response["errors"].length == 0) {
+          this.subjects.push(this.subject);
+          this.subject = new Subject();
+          this.subject.creator = this.globalService.signedUser;
+        } else {
+          this.errors = response["errors"];
+        }
+      },
+      err => {
+        console.log(err);
+      });
+  }
+
+  isEmpty() {
+    if (this.subjects && this.subjects.length == 0) {
+      return "center";
+    } else {
+      return null;
+    }
+  }
 
   ngOnInit() {
-    this.getUser();
+    this.subject.creator = this.globalService.signedUser;
+    this.getSubjects();
   }
 
 }

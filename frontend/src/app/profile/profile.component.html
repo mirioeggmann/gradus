@@ -85,21 +85,36 @@
 
   </mdl-card>
 
-  <div class="mdl-cell--2-col"></div>
+  <div class="mdl-cell--1-col"></div>
 
-  <mdl-card mdl-shadow="2" class="mdl-cell mdl-cell--8-col">
+  <mdl-card mdl-shadow="2" class="mdl-cell mdl-cell--10-col">
     <mdl-card-title>
       <h2 class="mdl-cell--12-col" mdl-card-title-text>Subjects</h2>
     </mdl-card-title>
 
     <mdl-card-supporting-text class="mdl-grid">
 
-      <div class="mdl-cell--3-col" *ngFor="let subject of subjects">
+      <div class="mdl-cell--9-col mdl-grid" [style.text-align]="isEmpty()">
 
-        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" attr.for="{{subject.name}}">
-          <input type="checkbox" [id]="subject.name" class="mdl-checkbox__input">
-          <span class="mdl-checkbox__label">{{ subject.name }}</span>
-        </label>
+        <div class="mdl-cell--3-col" *ngFor="let subject of subjects" style="text-align: center">
+
+          <span>{{ subject.name }}</span>
+
+        </div>
+
+        <span *ngIf="isEmpty()">no Subjects</span>
+
+      </div>
+
+      <div class="mdl-cell--3-col">
+
+        <h5>Create Subject</h5>
+
+        <mdl-textfield class="mdl-cell mdl-cell--12-col" type="text" label="Name" name="name" minlength="3" floating-label [(ngModel)]="subject.name"></mdl-textfield>
+
+        <div class="mdl-cell mdl-cell--12-col" *ngFor="let error of errors" style="text-align: center">{{ error }}</div>
+
+        <button mdl-button mdl-colored mdl-ripple class="mdl-cell mdl-cell--10-col" (click)="submitSubject()">Create</button>
 
       </div>
 

@@ -38,6 +38,17 @@ export class GradeComponent implements OnInit {
   };
   subjects: Subject[];
 
+  subjectIndex: number;
+  semesterIndex: number;
+
+  changeSubject() {
+    this.grade.subject = this.subjects[this.subjectIndex];
+  }
+
+  changeSemester() {
+    this.grade.semester = this.semesters[this.semesterIndex];
+  }
+
   submitGrade(){
 
     this.grade.date = new Date(this.dateString).getTime();

@@ -58,11 +58,30 @@ export class DashboardComponent implements OnInit {
 
   };
 
+  changeToAll() {
+
+    this.getGrades();
+    this.semesterControl.active = "allGrades";
+
+  }
+
+  changeSemester(semester) {
+
+    this.gradeService.getGradesSemester(semester.id).subscribe(
+      grades => this.grades = grades,
+      error =>  this.errorMessage += <any>error);
+
+    this.semesterControl.active = semester.id;
+
+  };
+
   ngOnInit() {
 
     this.user.firstname = this.globalService.signedUser.firstname;
     this.getSemesters();
     this.getGrades();
+
+    console.log("test");
   }
 
 }

@@ -21,15 +21,18 @@
         <div class="mdl-cell mdl-cell--12-col">
           <select [(ngModel)]="grade.subject" name="subject">
             <option value="" selected disabled>Select semester</option>
-            <option [value]="subject" *ngFor="let subject of subjects">Saab</option>
-            <option value="mercedes">Mercedes</option>
-            <option value="audi">Audi</option>
+            <option [ngValue]="subject" *ngFor="let subject of subjects">{{ subject.name }}</option>
           </select>
-          {{ subjects | json }}
+        </div>
+
+        <div class="mdl-cell mdl-cell--12-col">
+          <select [(ngModel)]="grade.semester" name="semester">
+            <option value="" selected disabled>Select semester</option>
+            <option [ngValue]="semester" *ngFor="let semester of semesters">{{ semester.name }}</option>
+          </select>
         </div>
 
         {{ grade | json }}
-
       </form>
       <div class="mdl-cell mdl-cell--1-col"></div>
       <div class="mdl-cell mdl-cell--1-col"></div>

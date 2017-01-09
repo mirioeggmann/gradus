@@ -22,9 +22,9 @@
         <header class="mdl-layout__header">
           <!-- Tabs -->
           <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-            <a [ngClass]="{'mdl-layout__tab': true, 'is-active': semesterControl.active == 'allGrades'}">all grades</a>
+            <a [ngClass]="{'mdl-layout__tab': true, 'is-active': semesterControl.active == 'allGrades'}" (click)="changeToAll()">all grades</a>
             <a *ngFor="let semester of semesters"
-               [ngClass]="{'mdl-layout__tab': true, 'is-active': semesterControl.active == semester.name}">{{
+               [ngClass]="{'mdl-layout__tab': true, 'is-active': semesterControl.active == semester.id}" (click)="changeSemester(semester)">{{
               semester.name}}</a>
           </div>
         </header>

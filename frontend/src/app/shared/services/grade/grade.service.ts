@@ -28,6 +28,13 @@ export class GradeService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
+  getGradesSemester(semesterId: number) {
+    return this.http.get(this.baseUrl + "/" + this.globalService.signedUser.id + "/semester/" + semesterId, this.defaultHeader)
+      .map(res => <Grade[]> res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+
+  }
+
   createGrade(body: Object): Observable<Grade> {
     let options = new RequestOptions({headers: new Headers({'Content-Type': 'application/json'})});
 
