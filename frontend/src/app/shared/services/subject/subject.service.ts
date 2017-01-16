@@ -37,4 +37,12 @@ export class SubjectService {
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
+
+  deleteSubject(body: Object): Observable<Object> {
+    let options = new RequestOptions({headers: new Headers({'Content-Type': 'application/json'})});
+
+    return this.http.post(this.baseUrl + "/delete", body, options)
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
 }

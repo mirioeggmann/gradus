@@ -22,9 +22,9 @@
         <header class="mdl-layout__header">
           <!-- Tabs -->
           <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-            <a [ngClass]="{'mdl-layout__tab': true, 'is-active': semesterControl.active == 'allGrades'}" (click)="changeToAll()">all grades</a>
+            <a [ngClass]="{'mdl-layout__tab': true, 'is-active': semesterControl.active == -1 }" (click)="changeToAll()">all grades</a>
             <a *ngFor="let semester of semesters"
-               [ngClass]="{'mdl-layout__tab': true, 'is-active': semesterControl.active == semester.id}" (click)="changeSemester(semester)">{{
+               [ngClass]="{'mdl-layout__tab': true, 'is-active': semesterControl.active == semester.id }" (click)="changeSemester(semester)">{{
               semester.name}}</a>
           </div>
         </header>
@@ -47,11 +47,26 @@
               <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">
                 <i class="material-icons">edit</i>
               </button>
-              <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">
+              <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab"
+                      (click)="deleteGrade(grade.id)">
                 <i class="material-icons">delete</i>
               </button>
             </td>
           </tr>
+          <!--<tr>
+            <td class="mdl-data-table__cell&#45;&#45;non-numeric"><input class="tableEditInput" name="name" title="test"></td>
+            <td><input class="tableEditInput"name="name" title="test"></td>
+            <td><input class="tableEditInput" name="name" title="test"></td>
+            <td>
+              <button class="mdl-button mdl-js-button mdl-button&#45;&#45;fab mdl-button&#45;&#45;mini-fab">
+                <i class="material-icons">edit</i>
+              </button>
+              <button class="mdl-button mdl-js-button mdl-button&#45;&#45;fab mdl-button&#45;&#45;mini-fab"
+                      (click)="deleteGrade(grade.id)">
+                <i class="material-icons">delete</i>
+              </button>
+            </td>
+          </tr>-->
           <tr>
             <td colspan="100" class="button-td">
               <button class="mdl-button mdl-js-button mdl-button--primary td-button" routerLink="/grade/new">

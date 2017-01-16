@@ -1,0 +1,21 @@
+select {
+
+  width: 100%;
+  height: 25px;
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0,.12);
+
+}
+
+.selectDiv {
+
+  padding-top: 30px;
+  padding-bottom: 20px;
+
+}
+
+.right {
+
+  text-align: right!important;
+
+}

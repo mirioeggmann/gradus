@@ -103,4 +103,19 @@ public class UserController {
         return new ResponseEntity<Response>(response, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "webresources/user/delete", method = RequestMethod.POST)
+    public ResponseEntity<?> deleteSubject(@RequestBody User user) {
+
+        Response deleteResponse = new Response();
+
+        if(!deleteResponse.getState()) {
+
+            userRepo.delete(user);
+            deleteResponse.setMessage("user deleted");
+        }
+
+        return new ResponseEntity<Response>(deleteResponse, HttpStatus.OK);
+
+    }
+
 }

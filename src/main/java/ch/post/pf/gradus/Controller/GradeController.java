@@ -52,6 +52,17 @@ public class GradeController {
 
     }
 
+    @RequestMapping(value = "webresources/grade/delete/{gradeID}", method = RequestMethod.GET)
+    public ResponseEntity<?> deleteGrade(@PathVariable Long gradeID) {
+
+        Response createResponse = new Response();
+
+        gradeRepo.delete(gradeID);
+
+        return new ResponseEntity<Response>(createResponse, HttpStatus.OK);
+
+    }
+
     @RequestMapping(value = "webresources/grade/{userID}", method = RequestMethod.GET)
     public ResponseEntity<?> allUser(@PathVariable Long userID) {
 

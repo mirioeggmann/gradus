@@ -19,7 +19,7 @@ export class GradeComponent implements OnInit {
               private subjectService : SubjectService, private semesterService : SemesterService,
               private router : Router) { }
 
-  title = "new Semester";
+  title = "new Grade";
   grade: Grade = new Grade();
   dateString: string;
   errors: string[];

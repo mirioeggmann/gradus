@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @CrossOrigin
@@ -35,11 +36,34 @@ public class SubjectController {
 
         Response createResponse = new Response();
 
-        Subject subject = mapper.map(subjectView, Subject.class);
+        List<Subject> subjects = subjectRepo.findAll();
+        Boolean isUsed = subjects.stream().anyMatch(subject -> Objects.equals(subject.getName(), subjectView.getName()));
 
-        subjectRepo.save(subject);
+        createResponse.checkIfTrue(isUsed, "name already used");
+        createResponse.checkIfNull(subjectView.getName(), "name not set");
+
+        if(!createResponse.getState()) {
+            Subject subject = mapper.map(subjectView, Subject.class);
+
+            subjectRepo.save(subject);
+            createResponse.setMessage("subject created");
+        }
 
         return new ResponseEntity<Response>(createResponse, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "webresources/subject/delete", method = RequestMethod.POST)
+    public ResponseEntity<?> deleteSubject(@RequestBody Subject subject) {
+
+        Response deleteResponse = new Response();
+
+        if(!deleteResponse.getState()) {
+
+            subjectRepo.delete(subject);
+            deleteResponse.setMessage("subject deleted");
+        }
+
+        return new ResponseEntity<Response>(deleteResponse, HttpStatus.OK);
 
     }
 

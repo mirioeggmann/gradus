@@ -1,11 +1,3 @@
-<!--<div *ngFor="let user of users">
-  ID: {{ user.id }}<br>
-  Firstname: {{ user.firstname }}<br>
-  lastname: {{ user.lastname }}<br>
-  email: {{ user.email }}<br>
-  <br>
-</div>-->
-
 <div class="mdl-grid">
 
   <mdl-card mdl-shadow="2" class="mdl-cell mdl-cell--8-col">
@@ -48,6 +40,9 @@
 
       </form>
 
+      {{ user | json }}
+      {{ backupUser | json }}
+
     </mdl-card-supporting-text>
 
   </mdl-card>
@@ -63,9 +58,9 @@
       <div class="mdl-cell--6-col mdl-grid">
         <div class="mdl-layout-spacer"></div>
         <div class="mdl-cell--6-col">
-          <button class="mdl-button mdl-js-button mdl-button--fab" (click)="changeEditState()">
-            <i class="material-icons" *ngIf="!editingOptions.isEditing">{{ editingOptions.editIcon }}</i>
-            <i class="material-icons" *ngIf="editingOptions.isEditing">{{ editingOptions.submitIcon }}</i>
+          <button class="mdl-button mdl-js-button mdl-button--fab" (click)="makeLeftAction()">
+            <i class="material-icons" *ngIf="editingOptions.action == ''">{{ editingOptions.editIcon }}</i>
+            <i class="material-icons" *ngIf="editingOptions.action == 'edit' || editingOptions.action == 'delete'">{{ editingOptions.submitIcon }}</i>
           </button>
         </div>
         <div class="mdl-layout-spacer"></div>
@@ -74,8 +69,9 @@
       <div class="mdl-cell--6-col mdl-grid">
         <div class="mdl-layout-spacer"></div>
         <div class="mdl-cell--6-col">
-          <button class="mdl-button mdl-js-button mdl-button--fab">
-            <i class="material-icons">delete</i>
+          <button class="mdl-button mdl-js-button mdl-button--fab" (click)="makeRightAction()">
+            <i class="material-icons" *ngIf="editingOptions.action == ''">{{ editingOptions.deleteIcon }}</i>
+            <i class="material-icons" *ngIf="editingOptions.action == 'edit' || editingOptions.action == 'delete'">{{ editingOptions.cancelIcon }}</i>
           </button>
         </div>
         <div class="mdl-layout-spacer"></div>
@@ -85,16 +81,14 @@
 
   </mdl-card>
 
-  <div class="mdl-cell--1-col"></div>
-
-  <mdl-card mdl-shadow="2" class="mdl-cell mdl-cell--10-col">
+  <mdl-card mdl-shadow="2" class="mdl-cell mdl-cell--12-col">
     <mdl-card-title>
       <h2 class="mdl-cell--12-col" mdl-card-title-text>Subjects</h2>
     </mdl-card-title>
 
     <mdl-card-supporting-text class="mdl-grid">
 
-      <div class="mdl-cell--9-col mdl-grid" [style.text-align]="isEmpty()">
+      <div class="mdl-cell--8-col mdl-grid" [style.text-align]="isEmpty()">
 
         <div class="mdl-cell--3-col" *ngFor="let subject of subjects" style="text-align: center">
 
@@ -106,15 +100,32 @@
 
       </div>
 
-      <div class="mdl-cell--3-col">
+      <div class="mdl-cell--2-col">
 
-        <h5>Create Subject</h5>
+        <h5 class="center">Create</h5>
 
         <mdl-textfield class="mdl-cell mdl-cell--12-col" type="text" label="Name" name="name" minlength="3" floating-label [(ngModel)]="subject.name"></mdl-textfield>
 
-        <div class="mdl-cell mdl-cell--12-col" *ngFor="let error of errors" style="text-align: center">{{ error }}</div>
+        <div class="mdl-cell mdl-cell--12-col" *ngFor="let error of createErrors" style="text-align: center">{{ error }}</div>
 
         <button mdl-button mdl-colored mdl-ripple class="mdl-cell mdl-cell--10-col" (click)="submitSubject()">Create</button>
+
+      </div>
+
+      <div class="mdl-cell--2-col">
+
+        <h5 class="right">Delete</h5>
+
+        <div class="mdl-cell mdl-cell--12-col selectDiv">
+          <select [(ngModel)]="subjectToDelete" name="subject">
+            <option [ngValue]="defaultSubject" selected disabled>Select semester</option>
+            <option [ngValue]="subject" *ngFor="let subject of subjects">{{ subject.name }}</option>
+          </select>
+        </div>
+
+        <div class="mdl-cell mdl-cell--12-col" *ngFor="let error of deleteErrors" style="text-align: center">{{ error }}</div>
+
+        <button mdl-button mdl-colored mdl-ripple class="mdl-cell mdl-cell--10-col" (click)="deleteSubject()">Delete</button>
 
       </div>
 

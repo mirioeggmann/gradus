@@ -26,7 +26,7 @@ export class DashboardComponent implements OnInit {
   constructor(private globalService : GlobalService, private subjectService : SubjectService,
               private semesterService : SemesterService, private gradeService : GradeService) { }
 
-  errorMessage: string;
+  errorMessage: string[];
 
 
   selected:Array<ITableItem> = new Array<ITableItem>();
@@ -51,37 +51,55 @@ export class DashboardComponent implements OnInit {
       grades => this.grades = grades,
       error => this.errorMessage += <any>error);
   }
+  getGradesBySemester(semesterID){
+    this.gradeService.getGradesSemester(semesterID).subscribe(
+      grades => this.grades = grades,
+      error =>  this.errorMessage += <any>error);
+  }
   grades: Grade[];
 
   semesterControl = {
-    active: "allGrades",
-
+    active: -1,
   };
 
   changeToAll() {
 
     this.getGrades();
-    this.semesterControl.active = "allGrades";
+    this.semesterControl.active = -1;
 
   }
 
   changeSemester(semester) {
 
-    this.gradeService.getGradesSemester(semester.id).subscribe(
-      grades => this.grades = grades,
-      error =>  this.errorMessage += <any>error);
-
+    this.getGradesBySemester(semester.id);
     this.semesterControl.active = semester.id;
 
   };
+
+  deleteGrade(id) {
+
+    this.gradeService.deleteGrade(id).subscribe(response => {
+      if (response["errors"].length == 0) {
+        if (this.semesterControl.active == -1) {
+          this.getGrades();
+        } else {
+          this.getGradesBySemester(this.semesterControl.active);
+        }
+      } else {
+        this.errorMessage += response["errors"];
+      }
+      },
+      err => {
+        console.log(err);
+      });
+
+  }
 
   ngOnInit() {
 
     this.user.firstname = this.globalService.signedUser.firstname;
     this.getSemesters();
     this.getGrades();
-
-    console.log("test");
   }
 
 }

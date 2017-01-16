@@ -44,9 +44,15 @@ export class UserService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
   }
 
+  deleteUser(body: Object): Observable<string> {
+    let options = new RequestOptions({headers: new Headers({'Content-Type': 'application/json'})});
+
+    return this.http.post(this.baseUrl + "/delete", body, options)
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
 
   signIn(body: Object): Observable<Object> {
-    let bodyString = JSON.stringify(body);
     let options = new RequestOptions(
       { headers: new Headers(
         {'Content-Type': 'application/json'})
