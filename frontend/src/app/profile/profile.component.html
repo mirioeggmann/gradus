@@ -40,8 +40,7 @@
 
       </form>
 
-      {{ user | json }}
-      {{ backupUser | json }}
+      <div class="mdl-cell mdl-cell--12-col center" *ngFor="let error of editErrors" style="text-align: center">{{ error }}</div>
 
     </mdl-card-supporting-text>
 
@@ -118,7 +117,7 @@
 
         <div class="mdl-cell mdl-cell--12-col selectDiv">
           <select [(ngModel)]="subjectToDelete" name="subject">
-            <option [ngValue]="defaultSubject" selected disabled>Select semester</option>
+            <option [ngValue]="defaultSubject" selected disabled>Select subject</option>
             <option [ngValue]="subject" *ngFor="let subject of subjects">{{ subject.name }}</option>
           </select>
         </div>

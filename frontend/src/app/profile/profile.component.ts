@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {User} from "../shared/models/user.model";
 import {UserService} from "../shared/services/user/user.service";
 import {GlobalService} from "../shared/global.service";
@@ -13,14 +13,16 @@ import {Router} from "@angular/router";
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private _UserService : UserService, private globalService : GlobalService, private subjectService : SubjectService, private router : Router) { }
+  constructor(private _UserService: UserService, private globalService: GlobalService, private subjectService: SubjectService, private router: Router) {
+  }
 
-  user : User = this.globalService.signedUser;
+  user: User = this.globalService.signedUser;
   defaultSubject: Subject = new Subject();
-  subject : Subject = new Subject();
-  subjectToDelete : Subject = this.defaultSubject;
+  subject: Subject = new Subject();
+  subjectToDelete: Subject = this.defaultSubject;
   createErrors: string[];
   deleteErrors: string[];
+  editErrors: string[];
   errors: string[];
 
   editingOptions = {
@@ -35,11 +37,12 @@ export class ProfileComponent implements OnInit {
 
   makeLeftAction() {
 
-    if(this.editingOptions.isEditing) {
+    if (this.editingOptions.isEditing) {
 
-      this.changeUserInfo();
-      this.editingOptions.action = "";
-      this.editingOptions.isEditing = !this.editingOptions.isEditing;
+      this.changeUserInfo(function (this) {
+        this.editingOptions.action = "";
+        this.editingOptions.isEditing = !this.editingOptions.isEditing;
+      });
 
     } else if (this.editingOptions.isDeleting) {
 
@@ -58,13 +61,13 @@ export class ProfileComponent implements OnInit {
 
   makeRightAction() {
 
-    if(this.editingOptions.isEditing) {
+    if (this.editingOptions.isEditing) {
 
       this.getUser();
       this.editingOptions.isEditing = !this.editingOptions.isEditing;
       this.editingOptions.action = "";
 
-    } else if(this.editingOptions.isDeleting) {
+    } else if (this.editingOptions.isDeleting) {
 
       this.editingOptions.isDeleting = !this.editingOptions.isDeleting;
       this.editingOptions.action = "";
@@ -75,28 +78,43 @@ export class ProfileComponent implements OnInit {
       this.editingOptions.action = "delete";
 
     }
-
   }
 
-  changeUserInfo() {
+  changeUserInfo(callback) {
 
-
-
+    this._UserService.updateUser(this.user).subscribe(
+      response => {
+        if (response["errors"].length == 0) {
+          this._UserService.getUser(this.globalService.signedUser.id).subscribe(
+            response => {
+              this.globalService.signedUser = response;
+              callback();
+            },
+            err => {
+              console.log(err);
+            }
+          );
+        } else {
+          this.editErrors = response["errors"];
+        }
+      },
+      error => this.errors += <any>error);
   }
 
   deleteUser() {
 
     this._UserService.deleteUser(this.globalService.signedUser).subscribe(
       response => this.errors.push(response),
-      error =>  this.errors += <any>error);
+      error => this.errors += <any>error);
 
   }
 
-  getSubjects(){
+  getSubjects() {
     this.subjectService.getSubjects().subscribe(
       subjects => this.subjects = subjects,
-      error =>  this.errors += <any>error);
+      error => this.errors += <any>error);
   };
+
   subjects: Subject[];
 
   getUser() {
@@ -104,7 +122,7 @@ export class ProfileComponent implements OnInit {
       user => this.user = user);
   }
 
-  submitSubject(){
+  submitSubject() {
 
     this.subjectService
       .createSubject(this.subject).subscribe(

@@ -103,8 +103,30 @@ public class UserController {
         return new ResponseEntity<Response>(response, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "webresources/user/update", method = RequestMethod.POST)
+    public ResponseEntity<?> updateUser(@RequestBody User user) {
+
+        Response updateResponse = new Response();
+
+        updateResponse.checkIfNull(user.getFirstname(), "firstname is empty");
+        updateResponse.checkIfNull(user.getLastname(), "lastname is empty");
+
+        updateResponse.checkIfNull(user.getEmail(), "email is empty");
+        updateResponse.checkIfNotEmail(user.getEmail(), "email in a not valid format");
+
+        if(!updateResponse.getState()) {
+
+                userRepo.save(user);
+
+                updateResponse.setMessage("update done");
+        }
+
+        return new ResponseEntity<Response>(updateResponse, HttpStatus.OK);
+
+    }
+
     @RequestMapping(value = "webresources/user/delete", method = RequestMethod.POST)
-    public ResponseEntity<?> deleteSubject(@RequestBody User user) {
+    public ResponseEntity<?> deleteUser(@RequestBody User user) {
 
         Response deleteResponse = new Response();
 
