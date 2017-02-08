@@ -1,3 +1,38 @@
-<p>
-  login works!
-</p>
+<div class="mdl-grid">
+
+  <div class="mdl-cell mdl-cell--3-col"></div>
+
+  <mdl-card mdl-shadow="2" class="mdl-cell mdl-cell--6-col">
+    <mdl-card-title>
+      <h2 mdl-card-title-text>{{ title }}</h2>
+    </mdl-card-title>
+
+    <mdl-card-supporting-text class="mdl-grid">
+
+      <div class="mdl-cell mdl-cell--1-col"></div>
+      <form class="mdl-cell mdl-cell--10-col">
+
+        <mdl-textfield class="mdl-cell mdl-cell--12-col" type="text" label="Email" name="email" floating-label [(ngModel)]="user.email"></mdl-textfield>
+        <mdl-textfield class="mdl-cell mdl-cell--12-col" type="password" label="Password" name="password" floating-label [(ngModel)]="user.password"></mdl-textfield>
+
+      </form>
+      <div class="mdl-cell mdl-cell--1-col"></div>
+      <div class="mdl-cell mdl-cell--1-col"></div>
+
+      <div class="mdl-cell mdl-cell--10-col">
+        <div class="mdl-cell mdl-cell--12-col" *ngFor="let error of errors">{{ error }}</div>
+      </div>
+
+      <div class="mdl-cell mdl-cell--1-col"></div>
+    </mdl-card-supporting-text>
+
+    <mdl-card-actions mdl-card-border class="mdl-grid">
+      <div class="mdl-cell mdl-cell--1-col"></div>
+      <button mdl-button mdl-colored mdl-ripple class="mdl-cell mdl-cell--10-col" (click)="submitUser()">Sign Up</button>
+    </mdl-card-actions>
+  </mdl-card>
+
+  <div class="mdl-cell mdl-cell--3-col"></div>
+
+
+</div>

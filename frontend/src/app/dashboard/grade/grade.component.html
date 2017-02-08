@@ -1,0 +1,55 @@
+<div class="mdl-grid">
+
+  <div class="mdl-cell mdl-cell--3-col"></div>
+
+  <mdl-card mdl-shadow="2" class="mdl-cell mdl-cell--6-col">
+    <mdl-card-title>
+      <h2 mdl-card-title-text>{{ title }}</h2>
+    </mdl-card-title>
+
+    <mdl-card-supporting-text class="mdl-grid">
+
+      <div class="mdl-cell mdl-cell--1-col"></div>
+      <form class="mdl-cell mdl-cell--10-col">
+
+        <mdl-textfield class="mdl-cell mdl-cell--12-col" type="text" label="Name" name="name" floating-label [(ngModel)]="grade.name"></mdl-textfield>
+        <mdl-textfield class="mdl-cell mdl-cell--12-col" type="number" pattern="^[1-6]$" label="Grade" name="grade" floating-label [(ngModel)]="grade.grade"></mdl-textfield>
+        <mdl-textfield class="mdl-cell mdl-cell--12-col" type="text" pattern="^\d+(\.\d{1,2})?$" label="Weight" name="weight" floating-label [(ngModel)]="grade.weight"></mdl-textfield>
+        <mdl-textfield class="mdl-cell mdl-cell--12-col" type="text" label="WritingDate" name="writingDate" floating-label [(ngModel)]="dateString"></mdl-textfield>
+        <mdl-textfield class="mdl-cell mdl-cell--12-col" type="text" label="Description" name="description" floating-label [(ngModel)]="grade.description"></mdl-textfield>
+
+        <div class="mdl-cell mdl-cell--12-col">
+          <select [(ngModel)]="grade.subject" name="subject">
+            <option value="" selected disabled>Select semester</option>
+            <option [ngValue]="subject" *ngFor="let subject of subjects">{{ subject.name }}</option>
+          </select>
+        </div>
+
+        <div class="mdl-cell mdl-cell--12-col">
+          <select [(ngModel)]="grade.semester" name="semester">
+            <option value="" selected disabled>Select semester</option>
+            <option [ngValue]="semester" *ngFor="let semester of semesters">{{ semester.name }}</option>
+          </select>
+        </div>
+
+      </form>
+      <div class="mdl-cell mdl-cell--1-col"></div>
+      <div class="mdl-cell mdl-cell--1-col"></div>
+
+      <div class="mdl-cell mdl-cell--10-col">
+        <div class="mdl-cell mdl-cell--12-col" *ngFor="let error of errors">{{ error }}</div>
+      </div>
+
+      <div class="mdl-cell mdl-cell--1-col"></div>
+    </mdl-card-supporting-text>
+
+    <mdl-card-actions mdl-card-border class="mdl-grid">
+      <div class="mdl-cell mdl-cell--1-col"></div>
+      <button mdl-button mdl-colored mdl-ripple class="mdl-cell mdl-cell--10-col" (click)="submitGrade()">Create</button>
+    </mdl-card-actions>
+  </mdl-card>
+
+  <div class="mdl-cell mdl-cell--3-col"></div>
+
+
+</div>

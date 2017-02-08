@@ -1,4 +1,30 @@
-<h1>
-  {{title}}
-</h1>
-<mdl-spinner single-color active></mdl-spinner>
+<div class="demo-container" mdl-shadow="2">
+   <mdl-layout mdl-layout-fixed-header mdl-layout-header-seamed>
+      <mdl-layout-header>
+         <mdl-layout-header-row>
+            <mdl-layout-title>{{title}}</mdl-layout-title>
+            <mdl-layout-spacer></mdl-layout-spacer>
+            <nav class="mdl-navigation mdl-layout--large-screen-only">
+               <a class="mdl-navigation__link" routerLink="/login" routerLinkActive="active" *ngIf="!globalService.signedIn">Login</a>
+               <a class="mdl-navigation__link" routerLink="/register" routerLinkActive="active" *ngIf="!globalService.signedIn">Register</a>
+               <a class="mdl-navigation__link" routerLink="/dashboard" routerLinkActive="active" *ngIf="globalService.signedIn">Dashboard</a>
+               <a class="mdl-navigation__link" routerLink="/profile" routerLinkActive="active" *ngIf="globalService.signedIn">Profile</a>
+               <a class="mdl-navigation__link" (click)="logout()" routerLinkActive="active" *ngIf="globalService.signedIn">Logout</a>
+            </nav>
+         </mdl-layout-header-row>
+      </mdl-layout-header>
+      <mdl-layout-drawer>
+         <mdl-layout-title>{{title}}</mdl-layout-title>
+         <nav class="mdl-navigation">
+           <a class="mdl-navigation__link" routerLink="/login" routerLinkActive="active" *ngIf="!globalService.signedIn">Login</a>
+           <a class="mdl-navigation__link" routerLink="/register" routerLinkActive="active" *ngIf="!globalService.signedIn">Register</a>
+           <a class="mdl-navigation__link" routerLink="/dashboard" routerLinkActive="active" *ngIf="globalService.signedIn">Dashboard</a>
+           <a class="mdl-navigation__link" routerLink="/profile" routerLinkActive="active" *ngIf="globalService.signedIn">Profile</a>
+           <a class="mdl-navigation__link" (click)="logout()" routerLinkActive="active" *ngIf="globalService.signedIn">Logout</a>
+         </nav>
+      </mdl-layout-drawer>
+      <mdl-layout-content>
+         <router-outlet></router-outlet>
+      </mdl-layout-content>
+   </mdl-layout>
+</div>

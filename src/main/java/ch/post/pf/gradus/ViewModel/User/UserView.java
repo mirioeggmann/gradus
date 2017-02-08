@@ -12,8 +12,6 @@ public class UserView {
 
     private String password;
 
-    private Long birthday;
-
     public Long getId() {
         return id;
     }
@@ -52,14 +50,6 @@ public class UserView {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Long getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Long birthday) {
-        this.birthday = birthday;
     }
 
 }

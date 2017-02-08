@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+.button-td {
+
+  padding: 0!important;
+
+}
+
+.td-button {
+
+  width: 100%;
+  height: 100%;
+
+}

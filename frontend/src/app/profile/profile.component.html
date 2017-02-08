@@ -1,0 +1,135 @@
+<div class="mdl-grid">
+
+  <mdl-card mdl-shadow="2" class="mdl-cell mdl-cell--8-col">
+    <mdl-card-title>
+      <h2 class="mdl-cell--12-col" mdl-card-title-text>User information</h2>
+    </mdl-card-title>
+
+    <mdl-card-supporting-text class="mdl-grid">
+
+      <div class="mdl-cell--12-col" *ngIf="!editingOptions.isEditing">
+
+        <ul class="mdl-list">
+          <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+            firstname: {{ user.firstname }}
+            </span>
+          </li>
+          <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+              lastname: {{ user.lastname }}
+            </span>
+          </li>
+          <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+              email: {{ user.email }}
+            </span>
+          </li>
+        </ul>
+
+      </div>
+
+      <form class="mdl-cell--12-col" *ngIf="editingOptions.isEditing">
+
+        <mdl-textfield class="mdl-cell--12-col" type="text" label="Firstname" name="firstname" floating-label
+                       [(ngModel)]="user.firstname"></mdl-textfield>
+        <mdl-textfield class="mdl-cell--12-col" type="text" label="Lastname" name="lastname" floating-label
+                       [(ngModel)]="user.lastname"></mdl-textfield>
+        <mdl-textfield class="mdl-cell--12-col" type="text" label="Email" name="email" floating-label
+                       [(ngModel)]="user.email"></mdl-textfield>
+
+      </form>
+
+      <div class="mdl-cell mdl-cell--12-col center" *ngFor="let error of editErrors" style="text-align: center">{{ error }}</div>
+
+    </mdl-card-supporting-text>
+
+  </mdl-card>
+
+  <mdl-card mdl-shadow="2" class="mdl-cell mdl-cell--4-col">
+    <mdl-card-title>
+      <h2 mdl-card-title-text>Actions</h2>
+    </mdl-card-title>
+
+    <mdl-card-supporting-text class="mdl-grid">
+
+
+      <div class="mdl-cell--6-col mdl-grid">
+        <div class="mdl-layout-spacer"></div>
+        <div class="mdl-cell--6-col">
+          <button class="mdl-button mdl-js-button mdl-button--fab" (click)="makeLeftAction()">
+            <i class="material-icons" *ngIf="editingOptions.action == ''">{{ editingOptions.editIcon }}</i>
+            <i class="material-icons" *ngIf="editingOptions.action == 'edit' || editingOptions.action == 'delete'">{{ editingOptions.submitIcon }}</i>
+          </button>
+        </div>
+        <div class="mdl-layout-spacer"></div>
+      </div>
+
+      <div class="mdl-cell--6-col mdl-grid">
+        <div class="mdl-layout-spacer"></div>
+        <div class="mdl-cell--6-col">
+          <button class="mdl-button mdl-js-button mdl-button--fab" (click)="makeRightAction()">
+            <i class="material-icons" *ngIf="editingOptions.action == ''">{{ editingOptions.deleteIcon }}</i>
+            <i class="material-icons" *ngIf="editingOptions.action == 'edit' || editingOptions.action == 'delete'">{{ editingOptions.cancelIcon }}</i>
+          </button>
+        </div>
+        <div class="mdl-layout-spacer"></div>
+      </div>
+
+    </mdl-card-supporting-text>
+
+  </mdl-card>
+
+  <mdl-card mdl-shadow="2" class="mdl-cell mdl-cell--12-col">
+    <mdl-card-title>
+      <h2 class="mdl-cell--12-col" mdl-card-title-text>Subjects</h2>
+    </mdl-card-title>
+
+    <mdl-card-supporting-text class="mdl-grid">
+
+      <div class="mdl-cell--8-col mdl-grid" [style.text-align]="isEmpty()">
+
+        <div class="mdl-cell--3-col" *ngFor="let subject of subjects" style="text-align: center">
+
+          <span>{{ subject.name }}</span>
+
+        </div>
+
+        <span *ngIf="isEmpty()">no Subjects</span>
+
+      </div>
+
+      <div class="mdl-cell--2-col">
+
+        <h5 class="center">Create</h5>
+
+        <mdl-textfield class="mdl-cell mdl-cell--12-col" type="text" label="Name" name="name" minlength="3" floating-label [(ngModel)]="subject.name"></mdl-textfield>
+
+        <div class="mdl-cell mdl-cell--12-col" *ngFor="let error of createErrors" style="text-align: center">{{ error }}</div>
+
+        <button mdl-button mdl-colored mdl-ripple class="mdl-cell mdl-cell--10-col" (click)="submitSubject()">Create</button>
+
+      </div>
+
+      <div class="mdl-cell--2-col">
+
+        <h5 class="right">Delete</h5>
+
+        <div class="mdl-cell mdl-cell--12-col selectDiv">
+          <select [(ngModel)]="subjectToDelete" name="subject">
+            <option [ngValue]="defaultSubject" selected disabled>Select subject</option>
+            <option [ngValue]="subject" *ngFor="let subject of subjects">{{ subject.name }}</option>
+          </select>
+        </div>
+
+        <div class="mdl-cell mdl-cell--12-col" *ngFor="let error of deleteErrors" style="text-align: center">{{ error }}</div>
+
+        <button mdl-button mdl-colored mdl-ripple class="mdl-cell mdl-cell--10-col" (click)="deleteSubject()">Delete</button>
+
+      </div>
+
+    </mdl-card-supporting-text>
+
+  </mdl-card>
+
+</div>

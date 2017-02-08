@@ -1,0 +1,103 @@
+<!--<p>-->
+<!--dashboard works!-->
+<!--</p>-->
+<!--<mdl-table mdl-shadow="2" [table-model]="tableModel"></mdl-table>-->
+
+
+<div class="mdl-grid">
+
+  <mdl-card mdl-shadow="2" class="mdl-cell mdl-cell--12-col">
+    <mdl-card-title>
+      <h2 mdl-card-title-text>Welcome, {{user.firstname}}!</h2>
+      <div class="mdl-layout-spacer"></div>
+      <button class="mdl-button mdl-js-button mdl-button--raised" routerLink="/semester/new" style="padding-left: 10px">
+        <i class="material-icons">add</i>
+        Semester
+      </button>
+    </mdl-card-title>
+
+    <mdl-card-supporting-text class="mdl-grid">
+
+      <div class="mdl-cell--12-col mdl-grid">
+        <header class="mdl-layout__header">
+          <!-- Tabs -->
+          <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+            <a [ngClass]="{'mdl-layout__tab': true, 'is-active': semesterControl.active == -1 }" (click)="changeToAll()">all grades</a>
+            <a *ngFor="let semester of semesters"
+               [ngClass]="{'mdl-layout__tab': true, 'is-active': semesterControl.active == semester.id }" (click)="changeSemester(semester)">{{
+              semester.name}}</a>
+          </div>
+        </header>
+
+        <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+          <thead>
+          <tr>
+            <th class="mdl-data-table__cell--non-numeric">Subject</th>
+            <th>Weight</th>
+            <th>Grade</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let grade of grades">
+            <td class="mdl-data-table__cell--non-numeric">{{ grade.name }}</td>
+            <td>{{ grade.weight }}</td>
+            <td>{{ grade.grade }}</td>
+            <td>
+              <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">
+                <i class="material-icons">edit</i>
+              </button>
+              <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab"
+                      (click)="deleteGrade(grade.id)">
+                <i class="material-icons">delete</i>
+              </button>
+            </td>
+          </tr>
+          <!--<tr>
+            <td class="mdl-data-table__cell&#45;&#45;non-numeric"><input class="tableEditInput" name="name" title="test"></td>
+            <td><input class="tableEditInput"name="name" title="test"></td>
+            <td><input class="tableEditInput" name="name" title="test"></td>
+            <td>
+              <button class="mdl-button mdl-js-button mdl-button&#45;&#45;fab mdl-button&#45;&#45;mini-fab">
+                <i class="material-icons">edit</i>
+              </button>
+              <button class="mdl-button mdl-js-button mdl-button&#45;&#45;fab mdl-button&#45;&#45;mini-fab"
+                      (click)="deleteGrade(grade.id)">
+                <i class="material-icons">delete</i>
+              </button>
+            </td>
+          </tr>-->
+          <tr>
+            <td colspan="100" class="button-td">
+              <button class="mdl-button mdl-js-button mdl-button--primary td-button" routerLink="/grade/new">
+                <i class="material-icons">add</i>
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mdl-cell--12-col mdl-grid">
+
+
+      </div>
+
+    </mdl-card-supporting-text>
+
+  </mdl-card>
+
+</div>
+
+<!--
+<button class="mdl-button mdl-js-button mdl-button&#45;&#45;fab">
+  <i class="material-icons">add</i>
+</button>
+-->
+
+<!--<p-dataTable class="ui-datatable" [value]="subjects">
+  <p-column field="id" header="Id"></p-column>
+  <p-column field="name" header="Name"></p-column>
+  <p-column field="creator.lastname" header="First Name"></p-column>
+  <p-column field="creator.firstname" header="Last Name"></p-column>
+</p-dataTable>-->

@@ -1,0 +1,15 @@
+Wie baue ich die Verbindung zu DB auf?
+
+1. Lade MySql Installer herunter
+https://dev.mysql.com/downloads/file/?id=466001
+
+2. Installiere MySql Server und MySql Workbench
+
+3. Erstelle einen User welcher "gradus" heisst.
+   PW ist wie username.
+
+   Dieser ist Admin und soll auf alle Schemen alle Rechte haben.
+
+4. Nach Installation verbinde per Workbench auf den Server. Erstelle ein Schema namens gradus
+
+5. Nun besteht die Chance von ca. 60% das es funktioniert hat. Sonst überprüfe ob du per Workbench auf den Server mit dem Erstellten Benutzer kommst!
